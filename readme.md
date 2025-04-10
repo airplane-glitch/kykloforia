@@ -24,6 +24,24 @@ Key features:
 
 This script parses FAA `.log` files into a standardized text format compatible with OpenARIA's CSV format.
 
+## CSV Format Column Definitions
+Note: Table copied from OpenARIA Repository
+
+| Column Num | Content             | Required | Comment                      |
+|------------|---------------------|----------|------------------------------|
+| 1          | Primary Partition   | False    | e.g. USA                     |
+| 2          | Secondary Partition | False    | e.g. Texas                   |
+| 3          | Timestamp           | True     | ISO 8601 format              |
+| 4          | VIN or ID           | True     | Unique with data feed        |
+| 5          | Latitude            | True     | -90.0 <= latitude <= 90      |
+| 6          | Longitude           | True     | -180.0 <= longitude <= 180.0 |
+| 7          | Altitude            | True     | In feet                      |
+| 8          | Custom 1            | False    | Any variable you choose      |
+| 9          | Custom 2            | False    | Any variable you choose      |
+| ...        | ...                 | ...      | ...                          |
+| N          | Custom N-7          | False    | Any variable you choose      |
+
+
 Key functionality:
 - Extracts 9 fields per message including time, latitude, longitude, altitude, aircraft ID, type, and callsign
 - Skips records missing required information

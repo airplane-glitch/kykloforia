@@ -3,10 +3,18 @@ import shutil
 import time
 from pathlib import Path
 from datetime import datetime
+from tkinter import Tk, filedialog
 
-# Configuration
-LOG_DIR = Path("D:/SWIM_Downloader_Complete/jumpstart-latest/log")  # Directory where logs are written
-ARCHIVE_DIR = Path("D:/SWIM_Downloader_Complete/log_archive")  # Directory where logs will be backed up
+# Select directories with UI
+root = Tk()
+root.withdraw()  # Hide the main Tkinter window
+
+print("Select the folder where logs are being written:")
+LOG_DIR = Path(filedialog.askdirectory(title="Select Log Directory"))
+
+print("Select the folder where logs should be backed up:")
+ARCHIVE_DIR = Path(filedialog.askdirectory(title="Select Archive Directory"))
+
 CHECK_INTERVAL = 60  # How often to check for new logs (in seconds)
 
 # Ensure archive directory exists

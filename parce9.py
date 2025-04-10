@@ -1,5 +1,6 @@
 import os
 import xml.etree.ElementTree as ET
+from tkinter import Tk, filedialog
 
 def parse_log_files(log_directory, output_txt, bad_data_txt):
     required_fields = ["Timestamp", "VIN or ID", "Latitude", "Longitude", "Altitude"]
@@ -32,13 +33,12 @@ def parse_log_files(log_directory, output_txt, bad_data_txt):
                         for record in root.findall(".//record"):
                             track = record.find(".//track")
                             flight_plan = record.find(".//flightPlan")
-                            enhanced_data = record.find(".//enhancedData")
 
                             entry = {
                                 "Primary Partition": src,
                                 "Secondary Partition": "",
                                 "Timestamp": track.findtext("mrtTime", "") if track is not None else "",
-                                "VIN or ID": enhanced_data.findtext("sfdpsGufi", "") if enhanced_data is not None else "",
+                                "VIN or ID": track.findtext("trackNum", "") if track is not None else "",
                                 "Latitude": track.findtext("lat", "") if track is not None else "",
                                 "Longitude": track.findtext("lon", "") if track is not None else "",
                                 "Altitude": track.findtext("reportedAltitude", "") if track is not None else "",
@@ -75,12 +75,24 @@ def parse_log_files(log_directory, output_txt, bad_data_txt):
     print(f"Bad data saved in {bad_data_txt}")
 
 def main():
-    log_directory = input("Enter the directory where the log files are located: ").strip().strip('"')
-    output_txt = input("Enter the file path for the output TXT file: ").strip().strip('"')
-    bad_data_txt = input("Enter the file path for the bad data TXT file: ").strip().strip('"')
+    root = Tk()
+    root.withdraw()
+    print("Select the directory where the log files are located:")
+    log_directory = filedialog.askdirectory(title="Select Log Directory")
+    if not log_directory:
+        print("No directory selected. Exiting.")
+        return
 
-    if not os.path.isdir(log_directory):
-        print("Error: The directory does not exist.")
+    print("Select location to save the output TXT file:")
+    output_txt = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
+    if not output_txt:
+        print("No output file selected. Exiting.")
+        return
+
+    print("Select location to save the bad data TXT file:")
+    bad_data_txt = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
+    if not bad_data_txt:
+        print("No bad data file selected. Exiting.")
         return
 
     parse_log_files(log_directory, output_txt, bad_data_txt)
