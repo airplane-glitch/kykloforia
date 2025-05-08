@@ -25,7 +25,7 @@ Key features:
 This script parses FAA `.log` files into a standardized text format compatible with OpenARIA's CSV format.
 
 ## CSV Format Column Definitions
-Note: Table copied from OpenARIA Repository
+Note: Note: The following table is adapted from the OpenARIA repository and defines the expected CSV structure used during parsing.
 
 | Column Num | Content             | Required | Comment                      |
 |------------|---------------------|----------|------------------------------|
@@ -76,9 +76,14 @@ After backups are created, use this parser to convert `.log` data into structure
 - These tools do not replace the FAA consumer, but enhance post-processing and safety of the log data.
 - FAA SWIM data is for research and development use only and not for operational use.
 - Be aware that field structures and message formats may change. Adjustments to parsing logic may be required over time.
+- FAA data is governed by NAS Data Release Board (NDRB) rules.
 
 ---
 
-## License
+## Attribution
 
-FAA data is governed by NAS Data Release Board (NDRB) rules.
+**Author:** Luis Tobar  
+**Institution:** Embry-Riddle Aeronautical University, DB College of Aviation  
+**Year:** 2025  
+
+This project is not endorsed by the FAA or MITRE and is provided solely for research and educational purposes.
