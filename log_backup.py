@@ -15,7 +15,7 @@ LOG_DIR = Path(filedialog.askdirectory(title="Select Log Directory"))
 print("Select the folder where logs should be backed up:")
 ARCHIVE_DIR = Path(filedialog.askdirectory(title="Select Archive Directory"))
 
-CHECK_INTERVAL = 60  # How often to check for new logs (in seconds)
+CHECK_INTERVAL = 180  # How often to check for new logs (in seconds)
 
 # Ensure archive directory exists
 ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
